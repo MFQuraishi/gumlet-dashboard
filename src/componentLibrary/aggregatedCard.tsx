@@ -14,9 +14,9 @@ export default function AggregatedCard({
     rightBorderPresent?: boolean
 }) {
   return (
-    <div className={`w-1/3 relative px-6 py-2 ${rightBorderPresent?"border-solid border-r dark:border-r-gray-800 border-r-gray-400":""}`}>
+    <div className={`md:w-1/3 relative px-6 md:py-2 py-4 ${rightBorderPresent?"border-solid max-md:border-b md:border-r dark:border-gray-800 border-gray-400":""}`}>
       <div className='flex flex-col'>
-        <Text isSecondary className='text-sm font-bold'>
+        <Text isSecondary className='text-sm font-bold mb-2'>
           {title}
         </Text>
         <Text className='font-bold'>
@@ -24,7 +24,7 @@ export default function AggregatedCard({
         </Text>
       </div>
       <Image
-        className='absolute top-1 right-6'
+        className='absolute md:top-1 top-3 right-6'
         src={imageSrc}
         alt='card-identifier-image'
         width={20}
