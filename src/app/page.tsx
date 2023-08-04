@@ -6,16 +6,17 @@ import Image from 'next/image'
 import VisualiserContainer from '@/componentLibrary/visualiserContainer'
 import { LineChart } from '@/componentLibrary/lineChart'
 import React, { useEffect, useState } from 'react'
-import { StreamingUsage, TranscodingUsage } from './pageModelStore'
+import { StorageUsage, StreamingUsage, TranscodingUsage } from './pageModelStore'
 import { AllDataModel } from './api/adhocData/allDataModels'
+import { BarChart } from '@/componentLibrary/barChart'
 
 const Page: React.FC = () => {
 
-  const [steamingUsage, setSteamingUsage] = useState<StreamingUsage>({} as StreamingUsage)
+  const [steamingUsage, setSteamingUsage] = useState<StreamingUsage>({x: [], y: []} as StreamingUsage)
   const [totalStreamingUsage, setTotalStreamingUsage] = useState<string>("--Hr --Min")
-  const [transcodingUsage, setTranscodingUsage] = useState<TranscodingUsage>({} as TranscodingUsage)
+  const [transcodingUsage, setTranscodingUsage] = useState<TranscodingUsage>({x: [], y: []} as TranscodingUsage)
   const [totalTranscodingUsage, setTotalTranscodingUsage] = useState<string>("--Hr --Min")
-  // const [transcodingUsage, setTranscodingUsage] = useState<TranscodingUsage>({} as TranscodingUsage)
+  const [storageValues, setStorageValues] = useState<StorageUsage>({x: [], y: []} as StorageUsage)
   const [totalStorageUsage, setTotalStorageUsage] = useState<string>("--Hr --Min")
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const Page: React.FC = () => {
     });
     const jsonData: AllDataModel = await data.json();
 
+    // setting streaming values
     let streamingUsageQuantity = 0
     let streamingUsageRaw: StreamingUsage = {x:[], y: []} as StreamingUsage
     jsonData.asset_duration.forEach((element, idx) => {
@@ -39,14 +41,18 @@ const Page: React.FC = () => {
     setSteamingUsage(streamingUsageRaw)
     setTotalStreamingUsage(convertToHrsAndMinsStr(streamingUsageQuantity))
 
+    // setting storage values
     let storageUsageQuantity = 0
+    let storageUsageRaw: StorageUsage ={x:[], y: []} as StorageUsage
     jsonData.storage_unit.forEach((element, idx) => {
-      // steamingUsage.y.push(element.units)
-      // steamingUsage.x.push(idx)
+      storageUsageRaw.y.push(element.units)
+      storageUsageRaw.x.push(idx)
       storageUsageQuantity += element.units
     })
+    setStorageValues(storageUsageRaw)
     setTotalStorageUsage(convertToHrsAndMinsStr(storageUsageQuantity))
 
+    // setting transcoding values
     let transcodingUsageQuantity = 0
     let transcodingUsageRaw: TranscodingUsage ={x:[], y: []} as TranscodingUsage
     jsonData.bandwidth_consumption.forEach((element, idx) => {
@@ -109,9 +115,10 @@ const Page: React.FC = () => {
         <VisualiserContainer 
           title='Storage Usage'
         >
-          <Text>
-            Coming soon...
-          </Text>
+          <BarChart
+            data={storageValues.y}
+            labels={storageValues.x}
+          />
         </VisualiserContainer>
         <VisualiserContainer 
           title='Top Assets'

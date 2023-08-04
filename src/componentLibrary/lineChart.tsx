@@ -48,7 +48,7 @@ export function LineChart({
         labels,
         datasets: [
             {
-                label: "none",
+                label: "",
                 data: data,
                 borderColor: '#8f7efb',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
