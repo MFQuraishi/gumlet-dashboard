@@ -18,6 +18,8 @@ module.exports = {
         'l-f-primary': '#222222',
         'd-f-secondary': '#9aa2a7',
         'l-f-secondary': '#455a63',
+
+        'purple-accent': '#8f7efb'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

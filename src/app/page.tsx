@@ -7,8 +7,9 @@ import VisualiserContainer from '@/componentLibrary/visualiserContainer'
 import { LineChart } from '@/componentLibrary/lineChart'
 import React, { useEffect, useState } from 'react'
 import { StorageUsage, StreamingUsage, TranscodingUsage } from './pageModelStore'
-import { AllDataModel } from './api/adhocData/allDataModels'
+import { AllDataModel, TopAssetModel } from './api/adhocData/allDataModels'
 import { BarChart } from '@/componentLibrary/barChart'
+import TopAssets from '@/componentLibrary/topAssets'
 
 const Page: React.FC = () => {
 
@@ -18,6 +19,7 @@ const Page: React.FC = () => {
   const [totalTranscodingUsage, setTotalTranscodingUsage] = useState<string>("--Hr --Min")
   const [storageValues, setStorageValues] = useState<StorageUsage>({x: [], y: []} as StorageUsage)
   const [totalStorageUsage, setTotalStorageUsage] = useState<string>("--Hr --Min")
+  const [topAssets, setTopAssets] = useState<TopAssetModel[]>([] as TopAssetModel[])
 
   useEffect(() => {
     getAndPopulatePageData()
@@ -28,6 +30,9 @@ const Page: React.FC = () => {
       method: "GET"
     });
     const jsonData: AllDataModel = await data.json();
+
+    // setting top assets 
+    setTopAssets(jsonData.top_assets)
 
     // setting streaming values
     let streamingUsageQuantity = 0
@@ -123,9 +128,9 @@ const Page: React.FC = () => {
         <VisualiserContainer 
           title='Top Assets'
         >
-          <Text>
-            Coming soon...
-          </Text>
+          <TopAssets
+            topAssetsData={topAssets}
+          />
         </VisualiserContainer>
       </div>      
     </main>
