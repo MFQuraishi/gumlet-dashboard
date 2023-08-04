@@ -1,4 +1,6 @@
-const allData = {
+import { AllDataModel } from "./allDataModels";
+
+const allData: AllDataModel = {
   bandwidth_consumption: [
     {
       units: 110673,
