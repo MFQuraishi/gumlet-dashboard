@@ -22,8 +22,8 @@ const Page: React.FC = () => {
     getAndPopulatePageData()
   }, [])
   
-  async function getAndPopulatePageData()  {
-    const data = await fetch("https://gumlet-dashboard.vercel.app/api/getAllData", {
+  async function getAndPopulatePageData()  {    
+    const data = await fetch(process.env.NEXT_PUBLIC_API_HOST+"api/getAllData", {
       method: "GET"
     });
     const jsonData: AllDataModel = await data.json();
