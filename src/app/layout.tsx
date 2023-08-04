@@ -17,7 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <body className={inter.className}>{children}</body> */}
-      <body className={"container bg-gray-200 dark:bg-gray-900"}>{children}</body>
+      {/* <body className={"container mx-auto my-7 bg-l-background dark:bg-d-background"}>{children}</body> */}
+      <body className={"container mx-auto my-7 bg-l-default dark:bg-d-default"}>{children}</body>
     </html>
   )
 }
