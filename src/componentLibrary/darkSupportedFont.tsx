@@ -1,20 +1,14 @@
 export default function Text({
     children,
-    darkThemeColor,
-    lightThemeColor, 
-    customClassName,
+    className,
 }: {
     children: React.ReactNode
-    darkThemeColor?: string,
-    lightThemeColor?: string,
-    customClassName?: string
+    className?: string
 }) {
-    let darkColor = !!darkThemeColor?darkThemeColor:"dark:text-slate-100"
-    let lightColor = !!lightThemeColor?lightThemeColor:"text-slate-950"
-    let customClass = !!customClassName?customClassName:""
+    let customClass = !!className?className:""    
 
     return (
-        <span className={`${darkColor} ${lightColor} text-slate-950 dark:text-slate-100 ${customClass}`}>
+        <span className={`text-slate-950 dark:text-slate-100 ${customClass}`}>
             {children}
         </span>
     )
