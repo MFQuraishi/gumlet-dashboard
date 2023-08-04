@@ -1,6 +1,7 @@
 import Text from '@/componentLibrary/darkSupportedFont'
 import AggregatedCard from "@/componentLibrary/aggregatedCard"
 import Image from 'next/image'
+import VisualiserContainer from '@/componentLibrary/visualiserContainer'
 
 export default function Home() {
   return (
@@ -24,6 +25,37 @@ export default function Home() {
           imageSrc={"/processor.svg"}
         />
       </div>
+
+      <div className='py-2 mt-5 flex flex-row flex-wrap'>
+        <VisualiserContainer 
+          title='Streaming Usage'
+        >
+          <Text>
+            Hello World
+          </Text>
+        </VisualiserContainer>
+        <VisualiserContainer 
+          title='Streaming Usage'
+        >
+          <Text>
+            Hello World
+          </Text>
+        </VisualiserContainer>
+        <VisualiserContainer 
+          title='Streaming Usage'
+        >
+          <Text>
+            Hello World
+          </Text>
+        </VisualiserContainer>
+        <VisualiserContainer 
+          title='Streaming Usage'
+        >
+          <Text>
+            Hello World
+          </Text>
+        </VisualiserContainer>
+      </div>      
     </main>
   )
 }
