@@ -10,6 +10,7 @@ import { StorageUsage, StreamingUsage, TranscodingUsage } from './pageModelStore
 import { AllDataModel, TopAssetModel } from './api/adhocData/allDataModels'
 import { BarChart } from '@/componentLibrary/barChart'
 import TopAssets from '@/componentLibrary/topAssets'
+import DropdownComponent from '@/componentLibrary/dropdownComponent'
 
 const Page: React.FC = () => {
 
@@ -25,8 +26,8 @@ const Page: React.FC = () => {
     getAndPopulatePageData()
   }, [])
   
-  async function getAndPopulatePageData()  {    
-    const data = await fetch(process.env.NEXT_PUBLIC_API_HOST+"api/getAllData", {
+  async function getAndPopulatePageData(filter="default")  {
+    const data = await fetch(process.env.NEXT_PUBLIC_API_HOST+`api/getAllData?filter=${filter}`, {
       method: "GET"
     });
     const jsonData: AllDataModel = await data.json();
@@ -78,8 +79,15 @@ const Page: React.FC = () => {
     return `${hours.toFixed(0)}Hrs ${minutes.toFixed(0)}Mins`
   }
 
+  let onDropdownSelect = (selectedVal: string) => {
+    getAndPopulatePageData(selectedVal)
+  }
+
   return (
     <main>
+      <DropdownComponent
+        onSelect={onDropdownSelect}
+      />
       <div className='border-solid border dark:border-gray-900 bg-l-foreground dark:bg-d-foreground rounded-xl px-4 py-2 flex flex-col md:flex-row'>
         <AggregatedCard 
           title={"STREAMING USAGE"}
