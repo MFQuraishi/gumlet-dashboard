@@ -46,13 +46,13 @@ function TopAssetsScaffold({
 }) {
   return (
     <div
-      className={`flex border-b dark:border-b-gray-800 border-b-gray-600 py-3 flex-row ${
+      className={`items-center flex border-b dark:border-b-gray-800 border-b-gray-600 py-3 flex-row ${
         isHeading ? "bg-l-default dark:bg-d-default" : ""
       }`}
     >
-      <div className="w-[40%] px-3">{component1}</div>
-      <div className="w-[30%] px-3">{component2}</div>
-      <div className="w-[30%] px-3">{component3}</div>
+      <div className="w-[40%] truncate px-3">{component1}</div>
+      <div className="w-[30%] break-words px-3">{component2}</div>
+      <div className="w-[30%]  px-3">{component3}</div>
     </div>
   );
 }

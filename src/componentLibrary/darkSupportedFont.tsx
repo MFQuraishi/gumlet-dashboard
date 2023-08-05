@@ -9,8 +9,6 @@ export default function Text({
 }) {
     let customClass = !!className?className:""    
     let fontColorClasses = isSecondary?"text-l-f-secondary dark:text-d-f-secondary":"text-l-f-primary dark:text-d-f-primary"
-console.log("===>>>", customClass);
-
 
     return (
         <span className={`${fontColorClasses} ${customClass}`}>
